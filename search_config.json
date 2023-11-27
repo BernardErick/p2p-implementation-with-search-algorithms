@@ -1,0 +1,6 @@
+{
+    "node_id" : "n1",
+    "resource_id" : "r7",
+    "ttl" : 8,
+    "algo" : "flooding"
+}
