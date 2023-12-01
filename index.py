@@ -23,7 +23,7 @@ def create_gif_from_pngs(directory="."):
         images.append(imageio.imread(file_path))
 
     # Salva o GIF com um intervalo de 1 segundo entre os frames
-    imageio.mimsave(output_gif_path, images, duration=500, loop=0)
+    imageio.mimsave(output_gif_path, images, duration=400, loop=0)
 
     png_files = [f for f in os.listdir(directory) if f.endswith(".png") and f.startswith("graph")]
 
