@@ -25,8 +25,16 @@ def create_gif_from_pngs(directory="."):
     # Salva o GIF com um intervalo de 1 segundo entre os frames
     imageio.mimsave(output_gif_path, images, duration=500, loop=0)
 
+    png_files = [f for f in os.listdir(directory) if f.endswith(".png") and f.startswith("graph")]
+
+    # Exclui cada arquivo PNG
+    for png_file in png_files:
+        file_path = os.path.join(directory, png_file)
+        os.remove(file_path)
+
+
 class P2PNetwork:
-    def _init_(self, num_nodes, min_neighbors, max_neighbors):
+    def __init__(self, num_nodes, min_neighbors, max_neighbors):
         self.num_nodes = num_nodes
         self.min_neighbors = min_neighbors
         self.max_neighbors = max_neighbors
@@ -166,8 +174,12 @@ def parse_config(config_data):
     min_neighbors = config["min_neighbors"]
     max_neighbors = config["max_neighbors"]
 
-    network = P2PNetwork(num_nodes, min_neighbors, max_neighbors)
+    print(num_nodes)
+    print(min_neighbors)
+    print(max_neighbors)
 
+    network = P2PNetwork(num_nodes, min_neighbors, max_neighbors)
+    
     for node_resources in config["resources"]:
         node_id, resources = node_resources.split(":")
         resources = [r.strip() for r in resources.split(",")]
@@ -211,8 +223,9 @@ if __name__ == "__main__":
         ]
     }
     '''
-    network = parse_config(config_data)
 
+    network = parse_config(config_data)
+    
     try:
         network.validate_network()
     except ValueError as e:
@@ -239,3 +252,4 @@ if __name__ == "__main__":
         print(step)
 
     create_gif_from_pngs()
+    
