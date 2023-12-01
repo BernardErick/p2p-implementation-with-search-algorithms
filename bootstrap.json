@@ -1,14 +1,18 @@
 {
-    "num_nodes": 6,
-    "min_neighbors": 2,
+    "num_nodes": 10,
+    "min_neighbors": 1,
     "max_neighbors": 4,
     "resources" :[
-        "n1: r1, r2",
+        "n1: r1",
         "n2: r3, r4",
         "n3: r5, r6",
         "n4: r7, r8",
         "n5: r9, r10",
-        "n6: r11, r12"
+        "n6: r11, r12",
+        "n7: r13, r14",
+        "n8: r15, r16",
+        "n9: r17, r18",
+        "n10: r21, r20"
     ],
     "edges" :[
         "n1, n2",
@@ -16,6 +20,9 @@
         "n3, n4",
         "n4, n5",
         "n5, n6",
-        "n6, n1"
+        "n3, n7",
+        "n3, n8",
+        "n4, n9",
+        "n4, n10"
     ]
 }

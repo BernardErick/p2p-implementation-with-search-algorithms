@@ -166,7 +166,11 @@ class P2PNetwork:
         return "Nada","ainda"
         pass
 
-
+def parse_config_from_file(file_path):
+    with open(file_path, 'r') as file:
+        config_data = file.read()
+    return parse_config(config_data)
+    
 def parse_config(config_data):
     config = json.loads(config_data)
 
@@ -193,38 +197,17 @@ def parse_config(config_data):
 
 
 if __name__ == "__main__":
-    config_data = '''
-    {
-        "num_nodes": 10,
-        "min_neighbors": 1,
-        "max_neighbors": 4,
-        "resources" :[
-            "n1: r1",
-            "n2: r3, r4",
-            "n3: r5, r6",
-            "n4: r7, r8",
-            "n5: r9, r10",
-            "n6: r11, r12",
-            "n7: r13, r14",
-            "n8: r15, r16",
-            "n9: r17, r18",
-            "n10: r21, r20"
-        ],
-        "edges" :[
-            "n1, n2",
-            "n2, n3",
-            "n3, n4",
-            "n4, n5",
-            "n5, n6",
-            "n3, n7",
-            "n3, n8",
-            "n4, n9",
-            "n4, n10"
-        ]
-    }
-    '''
 
-    network = parse_config(config_data)
+    # Caminho para o arquivo bootstrap.json na raiz do projeto
+    bootstrap_file_path = os.path.join(os.getcwd(), "bootstrap.json")
+
+    # Verifica se o arquivo bootstrap.json existe
+    if not os.path.exists(bootstrap_file_path):
+        print("Arquivo bootstrap.json não encontrado na raiz do projeto.")
+        exit(1)
+
+    # Lê o conteúdo do arquivo bootstrap.json
+    network = parse_config_from_file(bootstrap_file_path)
     
     try:
         network.validate_network()
@@ -235,7 +218,7 @@ if __name__ == "__main__":
     network.print_graph()
     network.print_graph_with_interface()
 
-    # Exemplo de uso da busca por inundação
+    # Definindo qual o tipo de teste eu vou querer
     node_id = 'n1'
     resource_id = 'r11'
     ttl = 4
